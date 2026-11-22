@@ -141,50 +141,35 @@
         .breadcrumbs span { color: #666; }
         .breadcrumbs .sep { color: #ccc; }
 
-        /* ===== ARTICLE LAYOUT ===== */
-        .article-layout {
-            display: grid;
-            grid-template-columns: 1fr 340px;
-            gap: 30px;
-            padding-bottom: 40px;
-        }
-
         /* ===== ARTICLE ===== */
         .article-wrapper {
             background: #fff;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            margin-bottom: 0;
         }
 
         .article-hero-img {
             width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, #1a1a2e 0%, #2c2c3a 50%, #1a1a2e 100%);
+            height: 480px;
+            background: #1a1a2e;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
             overflow: hidden;
-        }
-        .article-hero-img::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(circle at 30% 60%, rgba(198,40,40,0.2) 0%, transparent 50%),
-                radial-gradient(circle at 70% 40%, rgba(100,100,140,0.15) 0%, transparent 40%);
         }
         .article-hero-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
         .article-hero-placeholder {
             color: rgba(255,255,255,0.08);
             font-size: 100px;
             font-weight: 900;
-            z-index: 1;
+            display: none;
         }
 
         .article-body {
@@ -303,12 +288,19 @@
         .share-wa { background: #e8f5e9; }
         .share-ok { background: #fff3e0; }
 
-        /* Comments section */
+        /* ===== BOTTOM LAYOUT (comments + sidebar) ===== */
+        .bottom-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 24px;
+            padding-bottom: 40px;
+        }
+
+        /* ===== COMMENTS ===== */
         .comments-section {
             background: #fff;
             border-radius: 12px;
             padding: 24px;
-            margin-top: 20px;
             box-shadow: 0 1px 4px rgba(0,0,0,0.08);
         }
         .comments-title {
@@ -429,7 +421,7 @@
         .weather-detail { font-size: 12px; color: #888; text-align: center; }
         .weather-detail strong { display: block; color: #333; font-size: 14px; }
 
-        /* Popular sidebar */
+        /* Popular */
         .popular-list { display: flex; flex-direction: column; gap: 10px; }
         .popular-item { display: flex; gap: 10px; align-items: flex-start; }
         .popular-num {
@@ -510,7 +502,7 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 900px) {
-            .article-layout { grid-template-columns: 1fr; }
+            .bottom-layout { grid-template-columns: 1fr; }
             .article-body { padding: 20px; }
             .article-title { font-size: 24px; }
             .article-hero-img { height: 250px; }
@@ -589,152 +581,152 @@
     </div>
 </div>
 
-<!-- ARTICLE LAYOUT -->
+<!-- ARTICLE — FULL WIDTH -->
 <div class="container">
-    <div class="article-layout">
-        <!-- ARTICLE -->
-        <main>
-            <article class="article-wrapper">
-                <!-- Article image -->
-                <div class="article-hero-img">
-                    <img src="images/article.jpg" alt="Фото с места происшествия" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="article-hero-placeholder" style="display:none;">М</div>
+    <article class="article-wrapper no-click">
+        <!-- Article image — чистое, без оверлея -->
+        <div class="article-hero-img">
+            <img src="images/article.jpg" alt="Фото с места происшествия">
+            <div class="article-hero-placeholder">М</div>
+        </div>
+
+        <div class="article-body">
+            <!-- Category -->
+            <div class="article-category">Происшествия</div>
+
+            <!-- Title -->
+            <h1 class="article-title">Жуткая находка в промзоне: девушку держали в подвале</h1>
+
+            <!-- Meta -->
+            <div class="article-meta">
+                <div class="meta-author">
+                    <div class="author-avatar">АК</div>
+                    <span>Алексей Ковалёв</span>
                 </div>
+                <span>📅 18 марта, 09:14</span>
+                <span>👁 12 847</span>
+                <span>💬 342</span>
+            </div>
 
-                <div class="article-body">
-                    <!-- Category -->
-                    <div class="article-category">Происшествия</div>
+            <!-- Content -->
+            <div class="article-content">
+                <p>Вчера вечером в подвале мастерской на ул. Промышленной, 12 была обнаружена 22-летняя Кристина М., пропавшая 14 марта после вечеринки. Девушка в крайне истощённом состоянии, в коме, госпитализирована.</p>
 
-                    <!-- Title -->
-                    <h1 class="article-title">Жуткая находка в промзоне: девушку держали в подвале</h1>
+                <p>Ночью 17 марта в 112 поступил звонок через одноразовый телефон с информацией на Промышленную, 12: «В подвале мастерской умирает человек».</p>
 
-                    <!-- Meta -->
-                    <div class="article-meta no-click">
-                        <div class="meta-author">
-                            <div class="author-avatar">АК</div>
-                            <span>Алексей Ковалёв</span>
-                        </div>
-                        <span>📅 18 марта, 09:14</span>
-                        <span>👁 12 847</span>
-                        <span>💬 342</span>
+                <p>Владелица мастерской – Лола Кудрявцева доставлена на допрос, однако следствие не исключает наличие сообщников. Следствие продолжается.</p>
+
+                <p>Если вам что-то известно — звоните на горячую линию.</p>
+            </div>
+
+            <!-- Tags -->
+            <div class="article-tags">
+                <div class="article-tag">#происшествия</div>
+                <div class="article-tag">#москва</div>
+                <div class="article-tag">#промзона</div>
+                <div class="article-tag">#криминал</div>
+                <div class="article-tag">#расследование</div>
+            </div>
+
+            <!-- Share -->
+            <div class="share-bar">
+                <span class="share-label">Поделиться:</span>
+                <div class="share-btn share-tg">✈</div>
+                <div class="share-btn share-vk">В</div>
+                <div class="share-btn share-wa">📱</div>
+                <div class="share-btn share-ok">⭕</div>
+            </div>
+        </div>
+    </article>
+</div>
+
+<!-- BOTTOM: COMMENTS (left) + SIDEBAR (right) -->
+<div class="container" style="padding-top: 24px;">
+    <div class="bottom-layout">
+        <!-- COMMENTS -->
+        <div class="comments-section no-click">
+            <div class="comments-title">Комментарии <span class="count">342</span></div>
+
+            <div class="comment">
+                <div class="comment-avatar" style="background: #c62828;">Д</div>
+                <div>
+                    <div class="comment-header">
+                        <span class="comment-name">Дмитрий В.</span>
+                        <span class="comment-time">• 2 часа назад</span>
                     </div>
-
-                    <!-- Content -->
-                    <div class="article-content">
-                        <p>Вчера вечером в подвале мастерской на ул. Промышленной, 12 была обнаружена 22-летняя Кристина М., пропавшая 14 марта после вечеринки. Девушка в крайне истощённом состоянии, в коме, госпитализирована.</p>
-
-                        <p>Ночью 17 марта в 112 поступил звонок через одноразовый телефон с информацией на Промышленную, 12: «В подвале мастерской умирает человек».</p>
-
-                        <p>Владелица мастерской – Лола Кудрявцева доставлена на допрос, однако следствие не исключает наличие сообщников. Следствие продолжается.</p>
-
-                        <p>Если вам что-то известно — звоните на горячую линию.</p>
-                    </div>
-
-                    <!-- Tags -->
-                    <div class="article-tags no-click">
-                        <div class="article-tag">#происшествия</div>
-                        <div class="article-tag">#москва</div>
-                        <div class="article-tag">#промзона</div>
-                        <div class="article-tag">#криминал</div>
-                        <div class="article-tag">#расследование</div>
-                    </div>
-
-                    <!-- Share -->
-                    <div class="share-bar no-click">
-                        <span class="share-label">Поделиться:</span>
-                        <div class="share-btn share-tg">✈</div>
-                        <div class="share-btn share-vk">В</div>
-                        <div class="share-btn share-wa">📱</div>
-                        <div class="share-btn share-ok">⭕</div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- COMMENTS -->
-            <div class="comments-section no-click">
-                <div class="comments-title">Комментарии <span class="count">342</span></div>
-
-                <div class="comment">
-                    <div class="comment-avatar" style="background: #c62828;">Д</div>
-                    <div>
-                        <div class="comment-header">
-                            <span class="comment-name">Дмитрий В.</span>
-                            <span class="comment-time">• 2 часа назад</span>
-                        </div>
-                        <div class="comment-text">Кошмар какой-то. Как можно держать человека в подвале? Надеюсь, все причастные получат по заслугам.</div>
-                        <div class="comment-actions">
-                            <span>👍 47</span>
-                            <span>👎 3</span>
-                            <span>Ответить</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="comment">
-                    <div class="comment-avatar" style="background: #1565c0;">Е</div>
-                    <div>
-                        <div class="comment-header">
-                            <span class="comment-name">Елена С.</span>
-                            <span class="comment-time">• 1 час назад</span>
-                        </div>
-                        <div class="comment-text">Бедная девушка, сочувствую ей и её семье. Пусть скорее поправляется. Надо наказать всех виновных максимально строго!</div>
-                        <div class="comment-actions">
-                            <span>👍 31</span>
-                            <span>👎 1</span>
-                            <span>Ответить</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="comment">
-                    <div class="comment-avatar" style="background: #2e7d32;">А</div>
-                    <div>
-                        <div class="comment-header">
-                            <span class="comment-name">Андрей К.</span>
-                            <span class="comment-time">• 45 мин назад</span>
-                        </div>
-                        <div class="comment-text">Промзона — это всегда опасная зона. Там давно уже пора навести порядок. Столько людей пропадает, а полиция бездействует.</div>
-                        <div class="comment-actions">
-                            <span>👍 22</span>
-                            <span>👎 5</span>
-                            <span>Ответить</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="comment">
-                    <div class="comment-avatar" style="background: #e65100;">М</div>
-                    <div>
-                        <div class="comment-header">
-                            <span class="comment-name">Мария Т.</span>
-                            <span class="comment-time">• 30 мин назад</span>
-                        </div>
-                        <div class="comment-text">Звонок через одноразовый телефон... Это же спланированная операция. Кто-то знал, что там происходит, и боялся говорить открыто. Жуть.</div>
-                        <div class="comment-actions">
-                            <span>👍 56</span>
-                            <span>👎 2</span>
-                            <span>Ответить</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="comment">
-                    <div class="comment-avatar" style="background: #6a1b9a;">И</div>
-                    <div>
-                        <div class="comment-header">
-                            <span class="comment-name">Игорь П.</span>
-                            <span class="comment-time">• 15 мин назад</span>
-                        </div>
-                        <div class="comment-text">Знаю эту мастерскую, Кудрявцева там давно работала. Никогда бы не подумал... Мир тесен.</div>
-                        <div class="comment-actions">
-                            <span>👍 18</span>
-                            <span>👎 0</span>
-                            <span>Ответить</span>
-                        </div>
+                    <div class="comment-text">Кошмар какой-то. Как можно держать человека в подвале? Надеюсь, все причастные получат по заслугам.</div>
+                    <div class="comment-actions">
+                        <span>👍 47</span>
+                        <span>👎 3</span>
+                        <span>Ответить</span>
                     </div>
                 </div>
             </div>
-        </main>
+
+            <div class="comment">
+                <div class="comment-avatar" style="background: #1565c0;">Е</div>
+                <div>
+                    <div class="comment-header">
+                        <span class="comment-name">Елена С.</span>
+                        <span class="comment-time">• 1 час назад</span>
+                    </div>
+                    <div class="comment-text">Бедная девушка, сочувствую ей и её семье. Пусть скорее поправляется. Надо наказать всех виновных максимально строго!</div>
+                    <div class="comment-actions">
+                        <span>👍 31</span>
+                        <span>👎 1</span>
+                        <span>Ответить</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-avatar" style="background: #2e7d32;">А</div>
+                <div>
+                    <div class="comment-header">
+                        <span class="comment-name">Андрей К.</span>
+                        <span class="comment-time">• 45 мин назад</span>
+                    </div>
+                    <div class="comment-text">Промзона — это всегда опасная зона. Там давно уже пора навести порядок. Столько людей пропадает, а полиция бездействует.</div>
+                    <div class="comment-actions">
+                        <span>👍 22</span>
+                        <span>👎 5</span>
+                        <span>Ответить</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-avatar" style="background: #e65100;">М</div>
+                <div>
+                    <div class="comment-header">
+                        <span class="comment-name">Мария Т.</span>
+                        <span class="comment-time">• 30 мин назад</span>
+                    </div>
+                    <div class="comment-text">Звонок через одноразовый телефон... Это же спланированная операция. Кто-то знал, что там происходит, и боялся говорить открыто. Жуть.</div>
+                    <div class="comment-actions">
+                        <span>👍 56</span>
+                        <span>👎 2</span>
+                        <span>Ответить</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-avatar" style="background: #6a1b9a;">И</div>
+                <div>
+                    <div class="comment-header">
+                        <span class="comment-name">Игорь П.</span>
+                        <span class="comment-time">• 15 мин назад</span>
+                    </div>
+                    <div class="comment-text">Знаю эту мастерскую, Кудрявцева там давно работала. Никогда бы не подумал... Мир тесен.</div>
+                    <div class="comment-actions">
+                        <span>👍 18</span>
+                        <span>👎 0</span>
+                        <span>Ответить</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- SIDEBAR -->
         <aside class="sidebar no-click">
@@ -829,7 +821,7 @@
                         <div class="sn-time">07:15</div>
                     </div>
                     <div class="sidebar-news-item">
-                        <div class="sn-cat cat-culture" style="color:#00838f;">Культура</div>
+                        <div class="sn-cat" style="color:#00838f;">Культура</div>
                         <h5>Большой театр объявил премьеру балета</h5>
                         <div class="sn-time">06:58</div>
                     </div>
