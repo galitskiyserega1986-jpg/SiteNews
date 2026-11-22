@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жуткая находка в промзоне: девушку держали в подвале — МосГород</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', 'PT Sans', sans-serif;
+            background: #f0f1f3;
+            color: #1a1a1a;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { text-decoration: none; color: inherit; }
+        .no-click { pointer-events: none; user-select: none; cursor: default; }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            background: #1a1a2e;
+            color: #b0b0c0;
+            font-size: 12px;
+            padding: 6px 0;
+            border-bottom: 1px solid #2a2a40;
+        }
+        .top-bar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .top-bar-left, .top-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .top-bar span { opacity: 0.8; }
+        .top-bar .weather-mini { display: flex; align-items: center; gap: 4px; }
+        .top-bar .weather-mini svg { width: 14px; height: 14px; fill: #f0c040; }
+        .top-bar .currency { display: flex; gap: 12px; }
+        .currency-item { display: flex; align-items: center; gap: 3px; }
+        .currency-item .up { color: #4caf50; font-size: 10px; }
+        .currency-item .down { color: #f44336; font-size: 10px; }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, #c62828 0%, #b71c1c 50%, #8e0000 100%);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        }
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+        }
+        .logo-icon {
+            width: 40px; height: 40px;
+            background: #fff;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; font-weight: 900;
+            color: #c62828;
+        }
+        .logo-text {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .logo-text span { font-weight: 400; opacity: 0.8; font-size: 14px; margin-left: 6px; }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: rgba(255,255,255,0.9);
+            font-size: 13px;
+        }
+        .header-search {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 6px 14px;
+            gap: 6px;
+        }
+        .header-search svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.7); }
+        .header-search span { color: rgba(255,255,255,0.6); font-size: 13px; }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            background: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .nav .container {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            overflow: hidden;
+        }
+        .nav-item {
+            padding: 12px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-item.active {
+            border-bottom-color: #c62828;
+            color: #c62828;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== BREADCRUMBS ===== */
+        .breadcrumbs {
+            padding: 14px 0;
+            font-size: 12px;
+            color: #999;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .breadcrumbs span { color: #666; }
+        .breadcrumbs .sep { color: #ccc; }
+
+        /* ===== ARTICLE LAYOUT ===== */
+        .article-layout {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 30px;
+            padding-bottom: 40px;
+        }
+
+        /* ===== ARTICLE ===== */
+        .article-wrapper {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        .article-hero-img {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #2c2c3a 50%, #1a1a2e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .article-hero-img::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 30% 60%, rgba(198,40,40,0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 40%, rgba(100,100,140,0.15) 0%, transparent 40%);
+        }
+        .article-hero-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .article-hero-placeholder {
+            color: rgba(255,255,255,0.08);
+            font-size: 100px;
+            font-weight: 900;
+            z-index: 1;
+        }
+
+        .article-body {
+            padding: 30px 36px 40px;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: #c62828;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+        }
+
+        .article-title {
+            font-size: 30px;
+            font-weight: 900;
+            line-height: 1.25;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
+            color: #888;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .article-meta .meta-author {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            color: #555;
+        }
+        .author-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: #888;
+        }
+
+        .article-content {
+            font-size: 16px;
+            line-height: 1.75;
+            color: #2a2a2a;
+        }
+        .article-content p {
+            margin-bottom: 18px;
+        }
+        .article-content p:first-child {
+            font-size: 17px;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .article-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .article-tag {
+            background: #f5f5f5;
+            color: #666;
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        /* Share bar */
+        .share-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .share-label {
+            font-size: 13px;
+            color: #888;
+            font-weight: 600;
+        }
+        .share-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .share-tg { background: #e3f2fd; }
+        .share-vk { background: #e8eaf6; }
+        .share-wa { background: #e8f5e9; }
+        .share-ok { background: #fff3e0; }
+
+        /* Comments section */
+        .comments-section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 20px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+        .comments-title {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .comments-title .count {
+            background: #f5f5f5;
+            color: #888;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        .comment {
+            display: flex;
+            gap: 12px;
+            padding: 16px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .comment:last-child { border-bottom: none; }
+        .comment-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .comment-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .comment-name { font-size: 13px; font-weight: 700; color: #333; }
+        .comment-time { font-size: 11px; color: #aaa; }
+        .comment-text { font-size: 14px; line-height: 1.5; color: #444; }
+        .comment-actions {
+            display: flex;
+            gap: 14px;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #aaa;
+        }
+        .comment-actions span { display: flex; align-items: center; gap: 4px; }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+        .sidebar-block {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+        .sidebar-block-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: #1a1a1a;
+        }
+
+        /* Sidebar news */
+        .sidebar-news-list { display: flex; flex-direction: column; gap: 2px; }
+        .sidebar-news-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .sidebar-news-item:last-child { border-bottom: none; }
+        .sidebar-news-item .sn-cat {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 3px;
+        }
+        .cat-city { color: #1565c0; }
+        .cat-incident { color: #c62828; }
+        .cat-politics { color: #6a1b9a; }
+        .cat-society { color: #e65100; }
+        .cat-sport { color: #2e7d32; }
+        .sidebar-news-item h5 {
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.4;
+            color: #333;
+        }
+        .sidebar-news-item .sn-time {
+            font-size: 11px;
+            color: #aaa;
+            margin-top: 3px;
+        }
+
+        /* Weather */
+        .weather-widget { text-align: center; }
+        .weather-city { font-size: 13px; color: #888; margin-bottom: 8px; }
+        .weather-main { display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .weather-temp { font-size: 42px; font-weight: 800; color: #1a1a1a; }
+        .weather-icon { font-size: 42px; }
+        .weather-desc { font-size: 13px; color: #666; margin-top: 6px; }
+        .weather-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid #eee;
+        }
+        .weather-detail { font-size: 12px; color: #888; text-align: center; }
+        .weather-detail strong { display: block; color: #333; font-size: 14px; }
+
+        /* Popular sidebar */
+        .popular-list { display: flex; flex-direction: column; gap: 10px; }
+        .popular-item { display: flex; gap: 10px; align-items: flex-start; }
+        .popular-num {
+            font-size: 22px;
+            font-weight: 900;
+            color: #c62828;
+            min-width: 28px;
+            line-height: 1;
+            padding-top: 2px;
+            opacity: 0.6;
+        }
+        .popular-item h5 {
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.4;
+            color: #333;
+        }
+        .popular-item .pop-time { font-size: 11px; color: #aaa; margin-top: 3px; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #1a1a2e;
+            color: #888;
+            padding: 40px 0 20px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .footer-title {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .footer-links span { font-size: 13px; color: #666; }
+        .footer-bottom {
+            border-top: 1px solid #2a2a40;
+            padding-top: 16px;
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+        }
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .footer-logo-icon {
+            width: 32px; height: 32px;
+            background: #c62828;
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; font-weight: 900; color: #fff;
+        }
+        .footer-logo-text { color: #fff; font-size: 16px; font-weight: 800; }
+
+        /* Live dot */
+        .live-dot {
+            width: 6px; height: 6px;
+            background: #c62828;
+            border-radius: 50%;
+            display: inline-block;
+            animation: live-pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes live-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .article-layout { grid-template-columns: 1fr; }
+            .article-body { padding: 20px; }
+            .article-title { font-size: 24px; }
+            .article-hero-img { height: 250px; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar no-click">
+    <div class="container">
+        <div class="top-bar-left">
+            <span>Москва</span>
+            <div class="weather-mini">
+                <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.86-1.78 5.5-4.5 6.5v.5H9.5v-.5A7.07 7.07 0 0 1 5 9a7 7 0 0 1 7-7zm0 2a5 5 0 0 0-5 5c0 1.85 1.05 3.58 2.68 4.5h4.64A5.05 5.05 0 0 0 17 9a5 5 0 0 0-5-5zM5 20h14v2H5z"/></svg>
+                <span>−3°C</span>
+            </div>
+            <div class="currency">
+                <div class="currency-item">💵 91.35 <span class="up">▲0.42</span></div>
+                <div class="currency-item">💶 98.72 <span class="down">▼0.18</span></div>
+                <div class="currency-item">💴 60.14 <span class="up">▲0.07</span></div>
+            </div>
+        </div>
+        <div class="top-bar-right">
+            <span>Пробки: <strong style="color:#f0c040">7 баллов</strong></span>
+            <span class="live-dot"></span>
+            <span>Обновлено: 09:41</span>
+        </div>
+    </div>
+</div>
+
+<!-- HEADER -->
+<header class="header no-click">
+    <div class="container">
+        <div class="logo">
+            <div class="logo-icon">М</div>
+            <div class="logo-text">МосГород<span>новости</span></div>
+        </div>
+        <div class="header-right">
+            <div class="header-search">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                <span>Поиск...</span>
+            </div>
+            <span style="color:rgba(255,255,255,0.5);">|</span>
+            <span>🔔</span>
+            <span>☰</span>
+        </div>
+    </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="nav no-click">
+    <div class="container">
+        <div class="nav-item">Главное</div>
+        <div class="nav-item">Москва</div>
+        <div class="nav-item active">Происшествия</div>
+        <div class="nav-item">Политика</div>
+        <div class="nav-item">Общество</div>
+        <div class="nav-item">Экономика</div>
+        <div class="nav-item">Спорт</div>
+        <div class="nav-item">Культура</div>
+        <div class="nav-item">Технологии</div>
+        <div class="nav-item">Мнения</div>
+    </div>
+</nav>
+
+<!-- BREADCRUMBS -->
+<div class="container">
+    <div class="breadcrumbs no-click">
+        <span>Главная</span>
+        <span class="sep">›</span>
+        <span>Происшествия</span>
+        <span class="sep">›</span>
+        <span style="color: #c62828; font-weight: 600;">Жуткая находка в промзоне</span>
+    </div>
+</div>
+
+<!-- ARTICLE LAYOUT -->
+<div class="container">
+    <div class="article-layout">
+        <!-- ARTICLE -->
+        <main>
+            <article class="article-wrapper">
+                <!-- Article image -->
+                <div class="article-hero-img">
+                    <img src="images/article.jpg" alt="Фото с места происшествия" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="article-hero-placeholder" style="display:none;">М</div>
+                </div>
+
+                <div class="article-body">
+                    <!-- Category -->
+                    <div class="article-category">Происшествия</div>
+
+                    <!-- Title -->
+                    <h1 class="article-title">Жуткая находка в промзоне: девушку держали в подвале</h1>
+
+                    <!-- Meta -->
+                    <div class="article-meta no-click">
+                        <div class="meta-author">
+                            <div class="author-avatar">АК</div>
+                            <span>Алексей Ковалёв</span>
+                        </div>
+                        <span>📅 18 марта, 09:14</span>
+                        <span>👁 12 847</span>
+                        <span>💬 342</span>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="article-content">
+                        <p>Вчера вечером в подвале мастерской на ул. Промышленной, 12 была обнаружена 22-летняя Кристина М., пропавшая 14 марта после вечеринки. Девушка в крайне истощённом состоянии, в коме, госпитализирована.</p>
+
+                        <p>Ночью 17 марта в 112 поступил звонок через одноразовый телефон с информацией на Промышленную, 12: «В подвале мастерской умирает человек».</p>
+
+                        <p>Владелица мастерской – Лола Кудрявцева доставлена на допрос, однако следствие не исключает наличие сообщников. Следствие продолжается.</p>
+
+                        <p>Если вам что-то известно — звоните на горячую линию.</p>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="article-tags no-click">
+                        <div class="article-tag">#происшествия</div>
+                        <div class="article-tag">#москва</div>
+                        <div class="article-tag">#промзона</div>
+                        <div class="article-tag">#криминал</div>
+                        <div class="article-tag">#расследование</div>
+                    </div>
+
+                    <!-- Share -->
+                    <div class="share-bar no-click">
+                        <span class="share-label">Поделиться:</span>
+                        <div class="share-btn share-tg">✈</div>
+                        <div class="share-btn share-vk">В</div>
+                        <div class="share-btn share-wa">📱</div>
+                        <div class="share-btn share-ok">⭕</div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- COMMENTS -->
+            <div class="comments-section no-click">
+                <div class="comments-title">Комментарии <span class="count">342</span></div>
+
+                <div class="comment">
+                    <div class="comment-avatar" style="background: #c62828;">Д</div>
+                    <div>
+                        <div class="comment-header">
+                            <span class="comment-name">Дмитрий В.</span>
+                            <span class="comment-time">• 2 часа назад</span>
+                        </div>
+                        <div class="comment-text">Кошмар какой-то. Как можно держать человека в подвале? Надеюсь, все причастные получат по заслугам.</div>
+                        <div class="comment-actions">
+                            <span>👍 47</span>
+                            <span>👎 3</span>
+                            <span>Ответить</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment">
+                    <div class="comment-avatar" style="background: #1565c0;">Е</div>
+                    <div>
+                        <div class="comment-header">
+                            <span class="comment-name">Елена С.</span>
+                            <span class="comment-time">• 1 час назад</span>
+                        </div>
+                        <div class="comment-text">Бедная девушка, сочувствую ей и её семье. Пусть скорее поправляется. Надо наказать всех виновных максимально строго!</div>
+                        <div class="comment-actions">
+                            <span>👍 31</span>
+                            <span>👎 1</span>
+                            <span>Ответить</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment">
+                    <div class="comment-avatar" style="background: #2e7d32;">А</div>
+                    <div>
+                        <div class="comment-header">
+                            <span class="comment-name">Андрей К.</span>
+                            <span class="comment-time">• 45 мин назад</span>
+                        </div>
+                        <div class="comment-text">Промзона — это всегда опасная зона. Там давно уже пора навести порядок. Столько людей пропадает, а полиция бездействует.</div>
+                        <div class="comment-actions">
+                            <span>👍 22</span>
+                            <span>👎 5</span>
+                            <span>Ответить</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment">
+                    <div class="comment-avatar" style="background: #e65100;">М</div>
+                    <div>
+                        <div class="comment-header">
+                            <span class="comment-name">Мария Т.</span>
+                            <span class="comment-time">• 30 мин назад</span>
+                        </div>
+                        <div class="comment-text">Звонок через одноразовый телефон... Это же спланированная операция. Кто-то знал, что там происходит, и боялся говорить открыто. Жуть.</div>
+                        <div class="comment-actions">
+                            <span>👍 56</span>
+                            <span>👎 2</span>
+                            <span>Ответить</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment">
+                    <div class="comment-avatar" style="background: #6a1b9a;">И</div>
+                    <div>
+                        <div class="comment-header">
+                            <span class="comment-name">Игорь П.</span>
+                            <span class="comment-time">• 15 мин назад</span>
+                        </div>
+                        <div class="comment-text">Знаю эту мастерскую, Кудрявцева там давно работала. Никогда бы не подумал... Мир тесен.</div>
+                        <div class="comment-actions">
+                            <span>👍 18</span>
+                            <span>👎 0</span>
+                            <span>Ответить</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar no-click">
+            <!-- Weather -->
+            <div class="sidebar-block">
+                <div class="sidebar-block-title">🌤 Погода в Москве</div>
+                <div class="weather-widget">
+                    <div class="weather-city">Москва, вторник</div>
+                    <div class="weather-main">
+                        <div class="weather-temp">−3°</div>
+                        <div class="weather-icon">🌨</div>
+                    </div>
+                    <div class="weather-desc">Облачно, небольшой снег</div>
+                    <div class="weather-details">
+                        <div class="weather-detail">Ветер<strong>5 м/с</strong></div>
+                        <div class="weather-detail">Влажность<strong>78%</strong></div>
+                        <div class="weather-detail">Давление<strong>748 мм</strong></div>
+                        <div class="weather-detail">Ощущается<strong>−7°</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Popular -->
+            <div class="sidebar-block">
+                <div class="sidebar-block-title">🔥 Популярное</div>
+                <div class="popular-list">
+                    <div class="popular-item">
+                        <div class="popular-num">1</div>
+                        <div>
+                            <h5>Девушку держали в подвале промзоны</h5>
+                            <div class="pop-time">09:14 • 12 847</div>
+                        </div>
+                    </div>
+                    <div class="popular-item">
+                        <div class="popular-num">2</div>
+                        <div>
+                            <h5>ЦСКА одержал пятую победу подряд</h5>
+                            <div class="pop-time">08:05 • 15 400</div>
+                        </div>
+                    </div>
+                    <div class="popular-item">
+                        <div class="popular-num">3</div>
+                        <div>
+                            <h5>Большой театр объявил премьеру</h5>
+                            <div class="pop-time">вчера • 11 200</div>
+                        </div>
+                    </div>
+                    <div class="popular-item">
+                        <div class="popular-num">4</div>
+                        <div>
+                            <h5>Пожар на складе в Новой Москве</h5>
+                            <div class="pop-time">07:15 • 9 600</div>
+                        </div>
+                    </div>
+                    <div class="popular-item">
+                        <div class="popular-num">5</div>
+                        <div>
+                            <h5>Реконструкция набережных на 2026 год</h5>
+                            <div class="pop-time">08:52 • 8 200</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar news -->
+            <div class="sidebar-block">
+                <div class="sidebar-block-title">📰 Последние новости</div>
+                <div class="sidebar-news-list">
+                    <div class="sidebar-news-item">
+                        <div class="sn-cat cat-city">Москва</div>
+                        <h5>Мэрия утвердила план реконструкции набережных</h5>
+                        <div class="sn-time">08:52</div>
+                    </div>
+                    <div class="sidebar-news-item">
+                        <div class="sn-cat cat-politics">Политика</div>
+                        <h5>Мосгордума приняла закон о выплатах молодым семьям</h5>
+                        <div class="sn-time">08:30</div>
+                    </div>
+                    <div class="sidebar-news-item">
+                        <div class="sn-cat cat-sport">Спорт</div>
+                        <h5>ЦСКА одержал пятую победу подряд в РПЛ</h5>
+                        <div class="sn-time">08:05</div>
+                    </div>
+                    <div class="sidebar-news-item">
+                        <div class="sn-cat cat-society">Общество</div>
+                        <h5>Открылась выставка «Арт-Москва 2026»</h5>
+                        <div class="sn-time">07:41</div>
+                    </div>
+                    <div class="sidebar-news-item">
+                        <div class="sn-cat cat-incident">Происшествия</div>
+                        <h5>Пожар на складе в Новой Москве: 30 человек</h5>
+                        <div class="sn-time">07:15</div>
+                    </div>
+                    <div class="sidebar-news-item">
+                        <div class="sn-cat cat-culture" style="color:#00838f;">Культура</div>
+                        <h5>Большой театр объявил премьеру балета</h5>
+                        <div class="sn-time">06:58</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ad placeholder -->
+            <div class="sidebar-block" style="background: linear-gradient(135deg, #e8eaf6, #c5cae9); text-align: center; padding: 30px 18px;">
+                <div style="font-size: 11px; color: #5c6bc0; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Реклама</div>
+                <div style="font-size: 16px; font-weight: 700; color: #1a237e; margin-bottom: 6px;">ЖК «Московские огни»</div>
+                <div style="font-size: 13px; color: #3949ab;">Квартиры от 8.2 млн ₽<br>Ипотека от 5.9%</div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer no-click">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-logo">
+                    <div class="footer-logo-icon">М</div>
+                    <div class="footer-logo-text">МосГород</div>
+                </div>
+                <p style="font-size: 12px; line-height: 1.6; color: #555;">Главный информационный портал Москвы. Новости города, происшествия, политика, спорт и культура — 24 часа в сутки.</p>
+            </div>
+            <div>
+                <div class="footer-title">Разделы</div>
+                <div class="footer-links">
+                    <span>Москва</span>
+                    <span>Происшествия</span>
+                    <span>Политика</span>
+                    <span>Общество</span>
+                    <span>Экономика</span>
+                    <span>Спорт</span>
+                </div>
+            </div>
+            <div>
+                <div class="footer-title">Редакция</div>
+                <div class="footer-links">
+                    <span>О портале</span>
+                    <span>Контакты</span>
+                    <span>Реклама на сайте</span>
+                    <span>Правила</span>
+                    <span>Политика конфиденциальности</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 МосГород. Все права защищены. Свидетельство о регистрации СМИ: ЭЛ № ФС77-00000. 18+
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
